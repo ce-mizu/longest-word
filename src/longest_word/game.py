@@ -3,6 +3,7 @@ e verificar se palavras são válidas com base nessa grade.
 """
 import string
 import random
+import requests
 
 class Game:
     """Classe que representa um jogo de formação de palavras a partir de uma grade aleatória."""
@@ -25,7 +26,10 @@ class Game:
                 letters.remove(w)
             else:
                 return False
-        return True
+        return self.__check_dictionary(word)
 
-    def __str__(self):
-        return f"Grade atual: {' '.join(self.grid)}"
+    @staticmethod
+    def __check_dictionary(word):
+        response = requests.get(f"https://dictionary.lewagon.com/{word}")
+        json_response = response.json()
+        return json_response['found']
