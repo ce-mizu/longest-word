@@ -1,6 +1,6 @@
 """Testes para a classe Game."""
 
-from longest_word.game import Game
+from src.longest_word.game import Game
 import string
 
 
